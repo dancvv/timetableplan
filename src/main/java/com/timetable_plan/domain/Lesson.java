@@ -1,7 +1,8 @@
 package com.timetable_plan.domain;
 
+import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
-
+@PlanningEntity
 public class Lesson {
     private Long id;
     private String teacher;
