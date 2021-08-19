@@ -1,11 +1,18 @@
 package com.example.plannertime.domain;
 
-import lombok.Data;
 
-@Data
+
+
 public class Room {
     private String name;
     private Room(){}
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 
     public String getName() {
         return name;

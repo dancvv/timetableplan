@@ -1,6 +1,7 @@
 package com.example.plannertime.solver;
 
 
+
 import com.example.plannertime.domain.TimeTable;
 import org.optaplanner.core.api.solver.SolverJob;
 import org.optaplanner.core.api.solver.SolverManager;
@@ -16,7 +17,8 @@ public class TimeTableController {
 
     @Autowired
     private SolverManager<TimeTable, UUID> solverManager;
-    //
+
+
     @PostMapping("solve")
     public TimeTable solve(@RequestBody TimeTable problem) {
         UUID problemId = UUID.randomUUID();
@@ -32,7 +34,7 @@ public class TimeTableController {
         return solution;
     }
 
-    @GetMapping("/rest")
+    @PostMapping("/rest")
     public String stringTest(){
 //        throw new UnsupportedOperationException("it is not yet implemented");
         return "nothing";
