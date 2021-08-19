@@ -11,13 +11,28 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
     @Override
     public Constraint[] defineConstraints(ConstraintFactory constraintFactory) {
         return new Constraint[]{
+                // Hard constraints
                 roomConflict(constraintFactory),
                 teacherConflict(constraintFactory),
                 studentGroupConflict(constraintFactory),
+                // Soft constraints are only implemented in the "complete" implementation
         };
     }
 
+
+    private Constraint roomConflict(ConstraintFactory constraintFactory) {
+        // 实现的就是TimeTableEasyScoreCalculator的: 一间教室同时只能容纳一节课
+        return constraintFactory.from(Lesson.class)
+                .join(Lesson.class,
+                        Joiners.equal(Lesson::getTimeslot),
+                        Joiners.equal(Lesson::getRoom),
+                        Joiners.lessThan(Lesson::getId))
+                // 加权重
+                .penalize("Room conflict", HardSoftScore.ONE_HARD);
+    }
+
     private Constraint studentGroupConflict(ConstraintFactory constraintFactory) {
+        // 一个学生可以在同一时间 只能教授同一门课
         return constraintFactory
                 .from(Lesson.class)
                 .join(Lesson.class,
@@ -29,6 +44,7 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
     }
 
     private Constraint teacherConflict(ConstraintFactory constraintFactory) {
+        // 一个教室可以在同一时间 只能上一门课
         return constraintFactory
                 .from(Lesson.class)
                 .join(Lesson.class,
@@ -36,13 +52,6 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
                         Joiners.equal(Lesson::getTeacher),
                         Joiners.lessThan(Lesson::getId))
                 .penalize("Teacher conflict", HardSoftScore.ONE_HARD);
-    }
-
-    private Constraint roomConflict(ConstraintFactory constraintFactory) {
-        return constraintFactory.from(Lesson.class).join(Lesson.class, Joiners.equal(Lesson::getTimeslot),
-                Joiners.equal(Lesson::getRoom),
-                Joiners.lessThan(Lesson::getId))
-                .penalize("Room conflict", HardSoftScore.ONE_HARD);
     }
 
 }

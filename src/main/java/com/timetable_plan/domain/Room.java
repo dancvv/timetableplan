@@ -1,5 +1,8 @@
 package com.timetable_plan.domain;
 
+import lombok.Data;
+
+@Data
 public class Room {
     private String name;
     private Room(){}
