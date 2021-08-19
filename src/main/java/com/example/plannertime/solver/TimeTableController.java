@@ -1,4 +1,4 @@
-package com.example.plannertime.rest;
+package com.example.plannertime.solver;
 
 
 import com.example.plannertime.domain.TimeTable;

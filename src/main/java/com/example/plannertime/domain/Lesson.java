@@ -12,7 +12,7 @@ public class Lesson {
     private Timeslot timeslot;
     @PlanningVariable(valueRangeProviderRefs = "roomRange")
     private Room room;
-    private Lesson(){}
+    public Lesson(long id, String math, String studentGroup, String s){}
 
     public Lesson(Long id, String teacher, String studentGroup, Timeslot timeslot, Room room) {
         this.id = id;
