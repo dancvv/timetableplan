@@ -25,11 +25,10 @@ public class TimeTableController {
         // Submit the problem to start solving
         SolverJob<TimeTable, UUID> solverJob = solverManager.solve(problemId, problem);
         TimeTable solution;
-        try {
-            // Wait until the solving ends
-            solution = solverJob.getFinalBestSolution();
+        try{
+            solution=solverJob.getFinalBestSolution();
         } catch (InterruptedException | ExecutionException e) {
-            throw new IllegalStateException("Solving failed.", e);
+            throw new IllegalStateException("solving failed.",e);
         }
         return solution;
     }
