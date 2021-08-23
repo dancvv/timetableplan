@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
-
+@Deprecated
 @RestController
 @RequestMapping("/cloud")
 public class CloudController {
-    @Autowired
-    private SolverManager<CloudBalance,UUID> solverManager;
+//    @Autowired
+//    private SolverManager<CloudBalance,UUID> solverManager;
     @GetMapping("/info")
     public String messageInfo(){
         return "the controller is ok";
     }
     @PostMapping("/proceess")
-    public CloudBalance solve(@RequestBody CloudBalance problem){
-        UUID problemID=UUID.randomUUID();
-        SolverJob<CloudBalance,UUID> solverJob = solverManager.solve(problemID,problem);
-        CloudBalance solution;
-        try{
-            solution=solverJob.getFinalBestSolution();
-
-        } catch (InterruptedException|ExecutionException e) {
-            throw new IllegalStateException("solving failed",e);
-        }
-        return solution;
+    public void solve(@RequestBody CloudBalance problem){
+//        UUID problemID=UUID.randomUUID();
+//        SolverJob<CloudBalance,UUID> solverJob = solverManager.solve(problemID,problem);
+//        CloudBalance solution;
+//        try{
+//            solution=solverJob.getFinalBestSolution();
+//
+//        } catch (InterruptedException|ExecutionException e) {
+//            throw new IllegalStateException("solving failed",e);
+//        }
+//        return solution;
     }
 }

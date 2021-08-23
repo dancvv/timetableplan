@@ -15,28 +15,28 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("timeTable")
 public class TimeTableController {
 
-    @Autowired
-    private SolverManager<TimeTable, UUID> solverManager;
-
-
-    @PostMapping("solve")
-    public TimeTable solve(@RequestBody TimeTable problem) {
-        UUID problemId = UUID.randomUUID();
-        // Submit the problem to start solving
-        SolverJob<TimeTable, UUID> solverJob = solverManager.solve(problemId, problem);
-        TimeTable solution;
-        try{
-            solution=solverJob.getFinalBestSolution();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new IllegalStateException("solving failed.",e);
-        }
-        return solution;
-    }
-
-    @PostMapping("/rest")
-    public String stringTest(){
-//        throw new UnsupportedOperationException("it is not yet implemented");
-        return "nothing";
-    }
+//    @Autowired
+//    private SolverManager<TimeTable, UUID> solverManager;
+//
+//
+//    @PostMapping("solve")
+//    public TimeTable solve(@RequestBody TimeTable problem) {
+//        UUID problemId = UUID.randomUUID();
+//        // Submit the problem to start solving
+//        SolverJob<TimeTable, UUID> solverJob = solverManager.solve(problemId, problem);
+//        TimeTable solution;
+//        try{
+//            solution=solverJob.getFinalBestSolution();
+//        } catch (InterruptedException | ExecutionException e) {
+//            throw new IllegalStateException("solving failed.",e);
+//        }
+//        return solution;
+//    }
+//
+//    @PostMapping("/rest")
+//    public String stringTest(){
+////        throw new UnsupportedOperationException("it is not yet implemented");
+//        return "nothing";
+//    }
 
 }
